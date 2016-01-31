@@ -1,0 +1,204 @@
+<html ng-app="moremallApp">
+<head>
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="57x57" href="css/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="css/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="css/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="css/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="css/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="css/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="css/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="css/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="css/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="css/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="css/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="css/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="css/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- END favicon -->
+
+	<title>MoreMall</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+	<link rel="stylesheet" type="text/css" href="css/semantic.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+
+	<script src="js/semantic.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/home.js"></script>
+</head>
+<body ng-controller="giftIdeasCtrl">
+	
+	<div class="ui stackable menu fixed navbar">
+		<div class="ui container">
+			<div class="header item m-r-20">
+				<img src="css/images/logo.svg" class="m-r-10">
+				MOREMALL
+			</div>
+			<a href="home.html" class="item">
+				WHAT'S HOT
+			</a>
+			<a href="malls.html" class="item">
+				MALLS
+			</a>
+			<a href="#" class="item active">
+				GIFT IDEAS
+			</a>
+			<div class="right menu">
+				<a href="#" class="ui item">
+					<i class="user icon"></i>
+					SHIKAI
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="ui centered search-bar m-b-10">
+		<div class="ui container six column grid stackable">
+			<!-- <div class="ui menu"> -->
+			<div class="ui pointing dropdown link item column occasion-dd">
+				<span class="text">Occasion</span>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<div class="item">Any</div>
+					<div class="item">Birthday</div>
+					<div class="item">Anniversary</div>
+					<div class="item">Chinese New Year</div>
+					<div class="item">Deevapali</div>
+					<div class="item">Hari Raya</div>
+					<div class="item">Christmas</div>
+					<div class="item">New Year</div>
+				</div>
+			</div>
+			<div class="ui pointing dropdown link item column relationship-dd">
+				<span class="text">Relationship</span>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<div class="item">Any</div>
+					<div class="item">Girlfriend / Wife</div>
+					<div class="item">Boyfriend / Husband</div>
+					<div class="item">Mother</div>
+					<div class="item">Father</div>
+					<div class="item">Sister</div>
+					<div class="item">Brother</div>
+					<div class="item">Niece</div>
+					<div class="item">Nephew</div>
+					<div class="item">Friend</div>
+				</div>
+			</div>
+			<div class="ui pointing dropdown link item column gender-dd">
+				<span class="text">Gender</span>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<div class="item">Any</div>
+					<div class="item">Female</div>
+					<div class="item">Male</div>
+				</div>
+			</div>
+			<div class="ui pointing dropdown link item column price-dd" data-content="Do not work for V0.1">
+				<span class="text">Price</span>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<!-- <div class="header">Do not work for v0.1</div> -->
+					<!-- <div class="item">Any</div>
+					<div class="item">&#60;10</div>
+					<div class="item">&#60;50</div>
+					<div class="item">&#60;100</div>
+					<div class="item">&#60;200</div>
+					<div class="item">&#60;$500</div>
+					<div class="item">&#60;$1000</div>
+					<div class="item">&#62;$1000</div> -->
+				</div>
+			</div>
+			<div class="ui pointing dropdown link item column personality-dd" data-content="Do not work for V0.1">
+				<span class="text">Personality</span>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<!-- <div class="header">Do not work for v0.1</div> -->
+					<<!-- div class="item">Any</div>
+					<div class="item">Sporty</div>
+					<div class="item">Geek</div>
+					<div class="item">Fashion Star</div>
+					<div class="item">Bookworm</div>
+					<div class="item">Adventurous</div>
+					<div class="item">Gamer</div> -->
+				</div>
+			</div>
+			<div class="ui column" style="margin-top: -7px;">
+				<button class="ui red basic button" ng-click="recommend()">
+					Recommend!
+				</button>
+			</div>
+			<!-- </div> -->
+		</div>
+	</div>
+
+	<div class="ui container">
+		<div class="ui five cards stackable doubling">
+			<!-- product card -->
+			<div class="ui card" ng-repeat="product in searchedProduct | orderBy:'-likes'">
+				<div class="content">
+					<div class="right floated meta">{{helpers.unixToTimeFrom(product.timestamp)}}</div>
+					<img class="ui avatar image" src="{{product.userphoto}}"> {{product.username}}
+				</div>
+				<div class="image">
+					<div class="animated-heart hide"><i class="heart like icon red"></i></div>
+					<img src="{{product.product_image}}">
+				</div>
+				<div class="content">
+					<div class="header font-size-14">{{product.product_name}}</div>
+					<div class="meta">
+						<a>{{product.mall_name}}</a>
+						<!-- <span class="right floated">1 hour ago</span> -->
+					</div>
+					<div class="meta">
+						<a>{{product.shop_name}}</a>
+					</div>
+					<div class="description">
+						{{product.product_description}}
+					</div>
+				</div>
+				<div class="extra content">
+					<span class="like-button" ng-click="likeBtn(product)">
+						<i class="heart outline like icon"></i>
+						{{product.likes}}
+					</span>
+					<span class="right floated">
+						<i class="comment outline icon"></i>
+						{{product.comments}}
+					</span>
+				</div>
+			</div>
+			<!-- END product card -->
+		</div>
+		<!-- END card stack -->
+		
+		<div class="ui active centered large inline loader m-t-50"></div>
+		<div class="ui container centered grid m-t-30 m-b-30 load-more-btn hide">
+			<div class="left floated"><a href="http://stanleysoh.github.io/is429-Assignment1/" class="ui basic button">
+				Team 6
+			</a></div>
+			<button class="ui default button" ng-click="loadNextPage()">
+				Load More
+			</button>
+			<div class="right floated"><button class="ui basic button">
+				Team 8
+			</button></div>
+		</div>
+		
+	</div>
+</body>
+</html>

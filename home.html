@@ -1,0 +1,289 @@
+<html ng-app="moremallApp">
+<head>
+	<!-- favicon -->
+	<link rel="apple-touch-icon" sizes="57x57" href="css/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="css/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="css/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="css/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="css/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="css/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="css/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="css/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="css/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="css/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="css/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="css/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="css/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- END favicon -->
+
+	<title>MoreMall</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+	<link rel="stylesheet" type="text/css" href="css/semantic.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+	<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.3/firebase-simple-login.js"></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+
+	<script src="js/semantic.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/home.js"></script>
+</head>
+<body ng-controller="homeCtrl">
+	
+	<div class="ui stackable menu fixed navbar">
+		<div class="ui container">
+			<div class="header item m-r-20">
+				<img src="css/images/logo.svg" class="m-r-10">
+				MOREMALL
+			</div>
+			<a class="item active">
+				WHAT'S HOT
+			</a>
+			<a href="malls.html" class="item">
+				MALLS
+			</a>
+			<a href="gift-ideas.html" class="item">
+				GIFT IDEAS
+			</a>
+			<div class="right menu">
+				<a href="#" class="ui item">
+					<i class="user icon"></i>
+					SHIKAI
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="ui centered search-bar m-b-10">
+		<div class="ui container centered grid">
+			<div class="search-bar-pad">
+				<div class="ui search">
+					<div class="ui icon input">
+						<input class="prompt" type="text" placeholder="Search products...">
+						<i class="search icon"></i>
+					</div>
+					<div class="results"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui container">
+		<div class="ui five cards stackable doubling">
+			<!-- product card -->
+			<div class="ui card" ng-repeat="product in products | orderBy:'-timestamp'">
+				<div class="content">
+					<div class="right floated meta">{{helpers.unixToTimeFrom(product.timestamp)}}</div>
+					<img class="ui avatar image" src="{{product.userphoto}}"> {{product.username}}
+				</div>
+				<div class="image">
+					<div class="animated-heart hide"><i class="heart like icon red"></i></div>
+					<img src="{{product.product_image}}">
+				</div>
+				<div class="content">
+					<div class="header font-size-14">{{product.product_name}}</div>
+					<div class="meta">
+						<a>{{product.mall_name}}</a>
+						<!-- <span class="right floated">1 hour ago</span> -->
+					</div>
+					<div class="meta">
+						<a>{{product.shop_name}}</a>
+					</div>
+					<div class="description">
+						{{product.product_description}}
+					</div>
+				</div>
+				<div class="extra content">
+					<span class="like-button" ng-click="likeBtn(product)">
+						<i class="heart outline like icon"></i>
+						{{product.likes}}
+					</span>
+					<span class="right floated">
+						<i class="comment outline icon"></i>
+						{{product.comments}}
+					</span>
+				</div>
+			</div>
+			<!-- END product card -->
+			
+		</div>
+		<!-- END card stack -->
+		
+		<div class="ui active centered large inline loader m-t-50"></div>
+		<div class="ui container centered grid m-t-30 m-b-30 load-more-btn hide">
+			<div class="left floated"><a href="http://stanleysoh.github.io/is429-Assignment1/" class="ui basic button">
+				Team 6
+			</a></div>
+			<button class="ui default button" ng-click="loadNextPage()">
+				Load More
+			</button>
+			<div class="right floated"><a href="http://ngjh1991.github.io/is429-as1-kathy-alex/" class="ui basic button">
+				Team 8
+			</a></div>
+		</div>
+		
+	</div>
+
+	<div class="floating-btn main-color" ng-click="addProduct()">
+		<i class="plus icon"></i>
+	</div>
+
+	<!-- add product modal -->
+	<div class="ui small modal" id="addProduct">
+		<i class="close icon"></i>
+		<div class="header">
+			Add Product
+		</div>
+		<div class="content">
+			<form class="ui form">
+				<div class="field required">
+					<label>Upload Image</label>
+					<div class="inline field">
+						<input type="text" ng-model="product_imagelink" name="image-link" placeholder="Paste image link here">
+						<div class="ui left pointing label">
+							V0.1 only support an image link, not upload.
+						</div>
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field required">
+						<label>Shopping Mall</label>
+						<select class="ui" ng-model="product_mall" style="height: 38px;" name="shopping-mall">
+							<option ng-repeat="mall in malls" value="{{mall.mall_name}}">{{mall.mall_name}}</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>Shop Name</label>
+						<input type="text" ng-model="product_shop" name="shop-name" placeholder="Shop Name">
+					</div>
+				</div>
+				<div class="two fields">
+					<div class="field">
+						<label>Product Name</label>
+						<input type="text" ng-model="product_name" name="product-name" placeholder="Product Name">
+					</div>
+					<div class="field">
+						<label>Price</label>
+						<div class="ui labeled input">
+							<div class="ui label">$</div>
+							<input type="text" ng-model="product_price" name="price" placeholder="Price">
+						</div>
+					</div>
+				</div>
+				<div class="field">
+					<label>Description</label>
+					<textarea rows="2" ng-model="product_description" name="product-description"></textarea>
+				</div>
+				
+				<div class="field">
+					<label>Tags</label>
+					<input type="text" ng-model="product_tags" name="tags" placeholder="Tags separate with ,">
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Birthday</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Anniversary</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Chinese New Year</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Deevapali</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Hari Raya</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Christmas</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">New Year</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Girlfriend / Wife</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Boyfriend / Husband</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Mother</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Father</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Brother</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Sister</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Uncle</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Aunty</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Son</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Daughter</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Nephew</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Niece</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Friend</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Male</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Female</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Sporty</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Geek</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Bookworm</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Adventurous</a>
+					<a class="ui basic label m-t-5 tag-label" ng-click="clickTag()">Gamer</a>
+				</div>
+				<div class="ui error message">
+					<p>Please fill in the mandatory fields.</p>
+				</div>
+			</form>
+		</div>
+		<div class="actions">
+			<div class="ui deny button">
+				Cancel
+			</div>
+			<div class="ui vertical animated button teal" tabindex="0" ng-click="submitAddProduct()">
+				<div class="visible content">Done</div>
+				<div class="hidden content">
+					<i class="right checkmark icon"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END add product modal -->
+
+	<!-- survey modal -->
+	<div class="ui small modal" id="surveyModal1">
+		<i class="close icon"></i>
+		<div class="content">
+			<div class="ui centered grid m-t-10">
+				<div class="">Which gender would you recommend this product for?</div>
+			</div>
+			<div class="ui centered grid m-t-30 m-b-10 actions">
+				<div class="ui vertical animated button blue m-r-5 deny" tabindex="0">
+					<div class="visible content">Him</div>
+					<div class="hidden content">
+						<i class="right man icon"></i>
+					</div>
+				</div>
+				<div class="ui vertical animated button pink m-l-5 deny" tabindex="0">
+					<div class="visible content">Her</div>
+					<div class="hidden content">
+						<i class="right woman icon"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END survey modal -->
+	<!-- survey modal -->
+	<div class="ui small modal" id="surveyModal2">
+		<i class="close icon"></i>
+		<div class="content">
+			<div class="ui centered grid m-t-10">
+				<div class="">Which ocasion is this product suitable for?</div>
+			</div>
+			<div class="ui centered grid m-t-30 m-b-10">
+				<div class="ui vertical animated button blue m-r-5" tabindex="0">
+					<div class="visible content">Him</div>
+					<div class="hidden content">
+						<i class="right man icon"></i>
+					</div>
+				</div>
+				<div class="ui vertical animated button pink m-l-5" tabindex="0">
+					<div class="visible content">Her</div>
+					<div class="hidden content">
+						<i class="right woman icon"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END survey modal -->
+</body>
+</html>
